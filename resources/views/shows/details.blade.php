@@ -90,10 +90,10 @@
 										</thead>
 
 										<tbody>
-                                            @foreach($show->episodes as $index => $episode)
+                                            @foreach($show->episodes as $episode)
                                                 <tr>
                                                     <td>
-                                                        <a style="color: #ff55a5" href="{{ url("shows/{$show->id}/episodes/" . ($index + 1)) }}">
+                                                        <a style="color: #ff55a5" href="{{ url("shows/{$show->id}/episodes/" .$episode->episode_number) }}">
                                                             {{ $episode->title }}
                                                         </a>
                                                     </td>

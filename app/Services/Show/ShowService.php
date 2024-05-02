@@ -17,6 +17,11 @@ class ShowService
         return $this->showRepository->get();
     }
 
+    public function getRandomShows()
+    {
+        return $this->showRepository->getRandomShows();
+    }
+
     public function getShowById($id)
     {
         return $this->showRepository->getById($id);

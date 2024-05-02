@@ -23,6 +23,17 @@ class ShowController extends Controller
         }
     }
 
+    public function getTopShows()
+    {
+        try{
+            $shows = (new ShowService())->getRandomShows();
+            return view('shows.top_rated', compact('shows'));
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return ResponseHelper::errorResponse($exception->getMessage());
+        }
+    }
+
     public function show(Request $request)
     {
         try{

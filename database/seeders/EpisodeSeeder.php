@@ -19,6 +19,7 @@ class EpisodeSeeder extends Seeder
         foreach ($shows as $show) {
             Episode::factory()
                 ->count(rand(5, 10)) // Generate 5 to 10 random episodes for each show
+                ->sequence(fn ($sequence) => ['episode_number' => $sequence->index + 1])
                 ->create(['show_id' => $show->id]);
         }
     }

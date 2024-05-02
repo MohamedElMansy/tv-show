@@ -10,13 +10,13 @@
                 <div class="col-12">
                     <div class="section__wrap">
                         <!-- section title -->
-                        <h2 class="section__title">Shows list</h2>
+                        <h2 class="section__title">Top Shows</h2>
                         <!-- end section title -->
 
                         <!-- breadcrumb -->
                         <ul class="breadcrumb">
                             <li class="breadcrumb__item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb__item breadcrumb__item--active">Shows list</li>
+                            <li class="breadcrumb__item breadcrumb__item--active">Top Shows</li>
                         </ul>
                         <!-- end breadcrumb -->
                     </div>
@@ -59,38 +59,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                <!-- paginator -->
-                <div class="col-12">
-                    <ul class="paginator paginator--list">
-                        @if ($shows->onFirstPage())
-                            <li class="paginator__item paginator__item--prev paginator__item--disabled">
-                                <a href="#"><i class="icon ion-ios-arrow-back"></i></a>
-                            </li>
-                        @else
-                            <li class="paginator__item paginator__item--prev">
-                                <a href="{{ $shows->previousPageUrl() }}"><i class="icon ion-ios-arrow-back"></i></a>
-                            </li>
-                        @endif
-
-                            @for ($i = 1; $i <= $shows->lastPage(); $i++)
-                                <li class="paginator__item {{ $shows->currentPage() === $i ? 'paginator__item--active' : '' }}">
-                                    <a href="{{ $shows->url($i) }}">{{ $i }}</a>
-                                </li>
-                            @endfor
-
-                        @if ($shows->hasMorePages())
-                            <li class="paginator__item paginator__item--next">
-                                <a href="{{ $shows->nextPageUrl() }}"><i class="icon ion-ios-arrow-forward"></i></a>
-                            </li>
-                        @else
-                            <li class="paginator__item paginator__item--next paginator__item--disabled">
-                                <a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-                <!-- end paginator -->
             </div>
         </div>
     </div>

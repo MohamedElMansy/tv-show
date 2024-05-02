@@ -16,6 +16,7 @@ class Episode extends Model
     protected $fillable = [
         'title',
         'description',
+        'episode_number',
         'time',
         'thumbnail',
         'duration',

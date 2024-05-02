@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     //Shows
     Route::get('/shows', [ShowController::class, 'index'])->name('shows.index');
+    Route::get('/top-shows', [ShowController::class, 'getTopShows'])->name('shows.top');
     Route::get('/shows/{id}', [ShowController::class, 'show'])->name('shows.show');
     //Episode
     Route::get('shows/{showId}/episodes/{episodeNumber}', [ShowController::class, 'getEpisode']);

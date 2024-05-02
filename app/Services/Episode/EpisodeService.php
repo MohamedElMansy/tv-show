@@ -2,14 +2,17 @@
 
 namespace App\Services\Episode;
 
+use App\Repositories\EpisodeRepository;
 use App\Repositories\ShowRepository;
 
 class EpisodeService
 {
     protected $showRepository;
+    protected $episodeRepository;
     public function __construct()
     {
         $this->showRepository= new ShowRepository();
+        $this->episodeRepository = new EpisodeRepository();
     }
 
     public function getEpisode($showId ,$episodeNumber)
@@ -18,8 +21,13 @@ class EpisodeService
         if (!$show || !is_numeric($episodeNumber))
             return false;
 
-        $episode = $show->episodes()->orderBy('created_at')->skip($episodeNumber - 1)->first();
+        $episode = $show->episodes()->where('episode_number' , $episodeNumber)->first();
         return $episode;
     }
+
+     public function getEpisodes()
+     {
+         return $this->episodeRepository->get();
+     }
 
 }

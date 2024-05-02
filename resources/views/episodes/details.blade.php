@@ -52,7 +52,7 @@
                 <!-- end content -->
                 <!-- player -->
                 <div class="col-12 col-xl-6">
-                    <video controls autoplay width="480" height="300">
+                    <video controls width="480" height="300">
                         <source src="{{ $episode->video }}" type="video/mp4" >
                     </video>
                 </div>
