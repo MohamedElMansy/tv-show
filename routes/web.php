@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Show\ShowController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,9 +19,12 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::group(['middleware' => ['auth']], function () {
     //Home Page
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', [HomeController::class , 'index'])->name('home');
     //Logout
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    //Shows
+    Route::get('/shows', [ShowController::class, 'index'])->name('shows.index');
+    Route::get('/shows/{id}', [ShowController::class, 'show'])->name('shows.show');
+    //Episode
+    Route::get('shows/{showId}/episodes/{episodeNumber}', [ShowController::class, 'getEpisode']);
 });
