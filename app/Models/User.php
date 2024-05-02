@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -43,5 +44,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function setImageAttribute($image)
+    {
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->storeAs('public/images', $imageName);
+        $this->attributes['image'] = $imageName;
     }
 }
