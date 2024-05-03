@@ -42,7 +42,7 @@
                                 <div class="header__content">
                                     <!-- header logo -->
                                     <a href="{{ route('home') }}" class="header__logo">
-                                        <img src="{{ asset('img/logo.svg') }}" alt="">
+                                        <img src="{{ asset('img/logo.jpg') }}" alt="">
                                     </a>
                                     <!-- end header logo -->
 
@@ -94,14 +94,14 @@
                 </div>
 
                 <!-- header search -->
-                <form action="#" class="header__search">
+                <form action="{{ route('search') }}" method="GET" class="header__search">
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <div class="header__search-content">
-                                    <input type="text" placeholder="Search for a movie, TV Series that you are looking for">
+                                    <input type="text" name="q" placeholder="Search for a TV Show, Episode that you are looking for">
 
-                                    <button type="button">search</button>
+                                    <button type="submit">search</button>
                                 </div>
                             </div>
                         </div>

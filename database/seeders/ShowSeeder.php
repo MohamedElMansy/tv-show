@@ -13,6 +13,6 @@ class ShowSeeder extends Seeder
      */
     public function run(): void
     {
-        Show::factory()->count(10)->create();
+        Show::factory()->count(8)->create();
     }
 }

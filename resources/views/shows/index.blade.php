@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 @extends('layouts.app')
 
 @section('content')
@@ -62,9 +61,9 @@
 
                 <!-- paginator -->
                 <div class="col-12">
-                    <ul class="paginator paginator--list">
+                    <ul class="paginator paginator--list" style="-webkit-box-shadow: none;">
                         @if ($shows->onFirstPage())
-                            <li class="paginator__item paginator__item--prev paginator__item--disabled">
+                            <li class="paginator__item paginator__item--prev paginator__item--disabled" >
                                 <a href="#"><i class="icon ion-ios-arrow-back"></i></a>
                             </li>
                         @else

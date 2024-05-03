@@ -10,7 +10,7 @@
                         <form action="{{ route('register.submit') }}" method="POST" class="sign__form" enctype="multipart/form-data">
                             @csrf
                             <a  class="sign__logo">
-                                <img src="img/logo.svg" alt="">
+                                <img src="{{ asset('img/logo.jpg') }}" alt="">
                             </a>
 
                             <div class="sign__group">

@@ -93,6 +93,37 @@
                                 </div>
                             </div>
                         @endforeach
+                        <!-- paginator -->
+                        <div class="col-12">
+                            <ul class="paginator paginator--list" style="-webkit-box-shadow: none;">
+                                @if ($episodes->onFirstPage())
+                                    <li class="paginator__item paginator__item--prev paginator__item--disabled">
+                                        <a href="#"><i class="icon ion-ios-arrow-back"></i></a>
+                                    </li>
+                                @else
+                                    <li class="paginator__item paginator__item--prev">
+                                        <a href="{{ $episodes->previousPageUrl() }}"><i class="icon ion-ios-arrow-back"></i></a>
+                                    </li>
+                                @endif
+
+                                @for ($i = 1; $i <= $episodes->lastPage(); $i++)
+                                    <li class="paginator__item {{ $episodes->currentPage() === $i ? 'paginator__item--active' : '' }}">
+                                        <a href="{{ $episodes->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+
+                                @if ($episodes->hasMorePages())
+                                    <li class="paginator__item paginator__item--next">
+                                        <a href="{{ $episodes->nextPageUrl() }}"><i class="icon ion-ios-arrow-forward"></i></a>
+                                    </li>
+                                @else
+                                    <li class="paginator__item paginator__item--next paginator__item--disabled">
+                                        <a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                        <!-- end paginator -->
 						<!-- end card -->
 					</div>
 				</div>

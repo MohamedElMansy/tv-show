@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 @extends('layouts.app')
 
 @section('content')
@@ -75,7 +74,7 @@
 							<div class="card-header" id="headingOne">
 								<button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 									<span>Episodes: </span>
-									<span>22 Episodes</span>
+									<span>{{$show->episodes()->count()}} Episodes</span>
 								</button>
 							</div>
 

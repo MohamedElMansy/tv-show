@@ -9,8 +9,8 @@
                         <!-- authorization form -->
                         <form action="{{ route('login.submit') }}" method="POST" class="sign__form">
                             @csrf
-                            <a href="index.html" class="sign__logo">
-                                <img src="img/logo.svg" alt="">
+                            <a class="sign__logo">
+                                <img src="{{ asset('img/logo.jpg') }}" alt="">
                             </a>
 
                             <div class="sign__group">

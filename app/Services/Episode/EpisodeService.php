@@ -30,4 +30,9 @@ class EpisodeService
          return $this->episodeRepository->get();
      }
 
+    public function searchEpisode($searchQuery)
+    {
+        return $this->episodeRepository->search($searchQuery);
+    }
+
 }

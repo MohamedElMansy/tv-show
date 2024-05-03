@@ -23,6 +23,11 @@ class ShowRepository
         return $this->initateQuery()->inRandomOrder()->limit(5)->get();
     }
 
+    public function search($searchQuery)
+    {
+        return $this->initateQuery()->where('title', 'LIKE', '%' . $searchQuery . '%')->get();
+    }
+
     protected function initateQuery(): Builder|Show
     {
         return (new Show())->newModelQuery();
