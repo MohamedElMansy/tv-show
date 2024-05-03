@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -51,5 +52,15 @@ class User extends Authenticatable
         $imageName = time() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/images', $imageName);
         $this->attributes['image'] = $imageName;
+    }
+
+    public function follows(): BelongsToMany
+    {
+        return $this->belongsToMany(Show::class, 'user_show');
+    }
+
+    public function likedEpisodes(): BelongsToMany
+    {
+        return $this->belongsToMany(Episode::class, 'user_episode');
     }
 }

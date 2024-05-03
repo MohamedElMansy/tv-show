@@ -31,10 +31,15 @@
                             <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
                                 <div class="card__content">
                                     <div class="card__wrap">
-                                        <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+                                        <span class="card__rate"><i class="icon ion-ios-star"></i>
+                                        @if($episode->likes()->count() > 0)
+                                            {{ $episode->likes()->count() }}
+                                        @endif
+                                        </span>
                                     </div>
 
                                     <ul class="card__meta">
+                                        <li><span>Tv Show:</span> <a href="{{ url("shows/".$episode->show->id) }}">{{ $episode->show->title }}</a> </li>
                                         <li><span>Running time:</span> {{ $episode->duration }} min</li>
                                         <li><span>Time:</span> {{ $episode->time }}</li>
                                         <li><span>Country:</span> <a href="#">USA</a> </li>
@@ -44,6 +49,18 @@
                                         {{ $episode->description }}
                                     </div>
                                 </div>
+                                @if (Auth::user()->likedEpisodes && Auth::user()->likedEpisodes->contains($episode))
+                                    <form action="{{ route('episodes.dislike', ['showId' => $episode->show->id ,'episodeNumber' => $episode->episode_number]) }}" method="POST" style="padding-top: 2%;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Dislike</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('episodes.like', ['showId' => $episode->show->id ,'episodeNumber' => $episode->episode_number]) }}" method="POST" style="padding-top: 2%;">
+                                        @csrf
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Like</button>
+                                    </form>
+                                @endif
                             </div>
                             <!-- end card content -->
                         </div>
@@ -57,35 +74,6 @@
                     </video>
                 </div>
                 <!-- end player -->
-
-                <div class="col-12">
-                    <div class="details__wrap">
-                        <!-- availables -->
-                        <div class="details__devices">
-                            <span class="details__devices-title">Available on devices:</span>
-                            <ul class="details__devices-list">
-                                <li><i class="icon ion-logo-apple"></i><span>IOS</span></li>
-                                <li><i class="icon ion-logo-android"></i><span>Android</span></li>
-                                <li><i class="icon ion-logo-windows"></i><span>Windows</span></li>
-                                <li><i class="icon ion-md-tv"></i><span>Smart TV</span></li>
-                            </ul>
-                        </div>
-                        <!-- end availables -->
-
-                        <!-- share -->
-                        <div class="details__share">
-                            <span class="details__share-title">Share with friends:</span>
-
-                            <ul class="details__share-list">
-                                <li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
-                                <li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
-                                <li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
-                                <li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- end share -->
-                    </div>
-                </div>
             </div>
         </div>
         <!-- end details content -->

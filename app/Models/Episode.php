@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Episode extends Model
 {
@@ -26,5 +27,10 @@ class Episode extends Model
     public function show()
     {
         return $this->belongsTo(Show::class);
+    }
+
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_episode');
     }
 }

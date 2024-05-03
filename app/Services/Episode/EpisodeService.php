@@ -4,6 +4,7 @@ namespace App\Services\Episode;
 
 use App\Repositories\EpisodeRepository;
 use App\Repositories\ShowRepository;
+use Illuminate\Support\Facades\Auth;
 
 class EpisodeService
 {
@@ -33,6 +34,22 @@ class EpisodeService
     public function searchEpisode($searchQuery)
     {
         return $this->episodeRepository->search($searchQuery);
+    }
+
+    public function likeEpisode($showId ,$episodeNumber)
+    {
+        $episode = $this->getEpisode($showId ,$episodeNumber);
+        if ($episode){
+            Auth::user()->likedEpisodes()->attach($episode);
+        }
+    }
+
+    public function dislikeEpisode($showId ,$episodeNumber)
+    {
+        $episode = $this->getEpisode($showId ,$episodeNumber);
+        if ($episode){
+            Auth::user()->likedEpisodes()->detach($episode);
+        }
     }
 
 }

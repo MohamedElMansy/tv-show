@@ -40,7 +40,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="card__cover">
                                         <img src="{{ asset($show->cover) }}" alt="">
-                                        <a href="#" class="card__play">
+                                        <a href="{{ url("shows/$show->id") }}" class="card__play">
                                             <i class="icon ion-ios-play"></i>
                                         </a>
                                     </div>

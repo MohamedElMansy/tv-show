@@ -12,10 +12,16 @@ use Illuminate\Support\Facades\Log;
 
 class ShowController extends Controller
 {
+    private $showService;
+    public function __construct()
+    {
+        $this->showService = new ShowService();
+    }
+
     public function index()
     {
         try{
-            $shows = (new ShowService())->getShows();
+            $shows = $this->showService->getShows();
             return view('shows.index', compact('shows'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -26,7 +32,7 @@ class ShowController extends Controller
     public function getTopShows()
     {
         try{
-            $shows = (new ShowService())->getRandomShows();
+            $shows = $this->showService->getRandomShows();
             return view('shows.top_rated', compact('shows'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -37,7 +43,7 @@ class ShowController extends Controller
     public function show(Request $request)
     {
         try{
-            $show = (new ShowService())->getShowById($request->id);
+            $show = $this->showService->getShowById($request->id);
             if ($show)
                 return view('shows.details', compact('show'));
             else
@@ -48,14 +54,22 @@ class ShowController extends Controller
         }
     }
 
-    public function getEpisode(Request $request)
+    public function followShow(Request $request)
     {
         try{
-            $episode = (new EpisodeService())->getEpisode($request->showId, $request->episodeNumber);
-            if ($episode)
-                return view('episodes.details', compact('episode'));
-            else
-                return view('errors.not_found');
+            $this->showService->followShow($request->id);
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return ResponseHelper::errorResponse($exception->getMessage());
+        }
+    }
+
+    public function unfollowShow(Request $request)
+    {
+        try{
+            $this->showService->unFollowShow($request->id);
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return ResponseHelper::errorResponse($exception->getMessage());

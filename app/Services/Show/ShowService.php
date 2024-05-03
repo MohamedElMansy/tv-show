@@ -3,6 +3,7 @@
 namespace App\Services\Show;
 
 use App\Repositories\ShowRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ShowService
 {
@@ -30,5 +31,20 @@ class ShowService
     public function getShowById($id)
     {
         return $this->showRepository->getById($id);
+    }
+
+    public function followShow($id)
+    {
+        $show = $this->getShowById($id);
+        if ($show){
+            Auth::user()->follows()->attach($show);
+        }
+    }
+    public function unFollowShow($id)
+    {
+        $show = $this->getShowById($id);
+        if ($show){
+            Auth::user()->follows()->detach($show);
+        }
     }
 }

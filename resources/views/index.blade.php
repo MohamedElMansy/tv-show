@@ -66,7 +66,7 @@
                                         <div class="col-12 col-sm-4">
                                             <div class="card__cover">
                                                 <img src="{{ asset($episode->thumbnail) }}" alt="">
-                                                <a href="#" class="card__play">
+                                                <a href="{{ url("shows/{$episode->show->id}/episodes/$episode->episode_number") }}" class="card__play">
                                                     <i class="icon ion-ios-play"></i>
                                                 </a>
                                             </div>
@@ -77,7 +77,11 @@
                                                 <h3 class="card__title"><a href="{{ url("shows/{$episode->show->id}/episodes/$episode->episode_number") }}">{{ $episode->title }}</a></h3>
 
                                                 <div class="card__wrap">
-                                                    <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+                                                     <span class="card__rate"><i class="icon ion-ios-star"></i>
+                                                         @if($episode->likes()->count() > 0)
+                                                             {{ $episode->likes()->count() }}
+                                                         @endif
+                                                     </span>
 
                                                     <ul class="card__list">
                                                         <li>HD</li>

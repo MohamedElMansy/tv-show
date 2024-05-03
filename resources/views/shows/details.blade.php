@@ -35,12 +35,27 @@
 
 									<ul class="card__meta">
 										<li><span>Show time:</span> {{ $show->time }}</li>
+                                        @if($show->followers()->count() > 0)
+                                            <li><span>Followers:</span> {{ $show->followers()->count() }}</li>
+                                        @endif
 									</ul>
 
 									<div class="card__description card__description--details">
                                         {{ $show->description }}
                                     </div>
 								</div>
+                                @if (Auth::user()->follows && Auth::user()->follows->contains($show))
+                                    <form action="{{ route('shows.unfollow', ['id' => $show->id]) }}" method="POST" style="padding-top: 5%;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Unfollow</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('shows.follow', ['id' => $show->id]) }}" method="POST" style="padding-top: 5%;">
+                                        @csrf
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Follow</button>
+                                    </form>
+                                @endif
 							</div>
 							<!-- end card content -->
 						</div>
@@ -107,32 +122,6 @@
 					</div>
 				</div>
 				<!-- end accordion -->
-
-{{--				<div class="col-12">--}}
-{{--					<div class="details__wrap">--}}
-{{--						<!-- availables -->--}}
-{{--						<div class="details__devices">--}}
-{{--							<span class="details__devices-title">Available on devices:</span>--}}
-{{--							<ul class="details__devices-list">--}}
-{{--								<li><i class="icon ion-logo-apple"></i><span>IOS</span></li>--}}
-{{--							</ul>--}}
-{{--						</div>--}}
-{{--						<!-- end availables -->--}}
-
-{{--						<!-- share -->--}}
-{{--						<div class="details__share">--}}
-{{--							<span class="details__share-title">Share with friends:</span>--}}
-
-{{--							<ul class="details__share-list">--}}
-{{--								<li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>--}}
-{{--								<li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>--}}
-{{--								<li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>--}}
-{{--								<li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>--}}
-{{--							</ul>--}}
-{{--						</div>--}}
-{{--						<!-- end share -->--}}
-{{--					</div>--}}
-{{--				</div>--}}
 			</div>
 		</div>
 		<!-- end details content -->
