@@ -46,7 +46,7 @@
                     <div class="col-md-10">
                         <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
                             <div class="card-body">
-                                <h2 class="mb-2 text-center">Login</h2>
+                                <h2 class="mb-2 text-center">Show TV</h2>
                                 <p class="text-center">Login to stay connected.</p>
                                 <form action="{{ route('admin.login.submit') }}" method="POST">
                                     @csrf
