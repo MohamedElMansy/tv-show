@@ -53,12 +53,12 @@
                                     <form action="{{ route('episodes.dislike', ['showId' => $episode->show->id ,'episodeNumber' => $episode->episode_number]) }}" method="POST" style="padding-top: 2%;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Dislike</button>
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0; color: white">Dislike</button>
                                     </form>
                                 @else
                                     <form action="{{ route('episodes.like', ['showId' => $episode->show->id ,'episodeNumber' => $episode->episode_number]) }}" method="POST" style="padding-top: 2%;">
                                         @csrf
-                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Like</button>
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0; color: white">Like</button>
                                     </form>
                                 @endif
                             </div>

@@ -48,12 +48,12 @@
                                     <form action="{{ route('shows.unfollow', ['id' => $show->id]) }}" method="POST" style="padding-top: 5%;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Unfollow</button>
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0; color: white">Unfollow</button>
                                     </form>
                                 @else
                                     <form action="{{ route('shows.follow', ['id' => $show->id]) }}" method="POST" style="padding-top: 5%;">
                                         @csrf
-                                        <button type="submit" class="header__sign-in" style="margin-left: 0;">Follow</button>
+                                        <button type="submit" class="header__sign-in" style="margin-left: 0; color: white">Follow</button>
                                     </form>
                                 @endif
 							</div>
