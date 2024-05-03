@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Enums\User\UserRoleEnum;
 use App\Http\Requests\Auth\Register\RegisterRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserRepository
 {
@@ -17,5 +19,20 @@ class UserRepository
         $user->save();
 
         return $user;
+    }
+
+    public function get()
+    {
+        return $this->initateQuery()->where('role' , UserRoleEnum::USER->value)->paginate(10);
+    }
+
+    public function getById($id)
+    {
+        return $this->initateQuery()->where('role' , UserRoleEnum::USER->value)->find($id);
+    }
+
+    protected function initateQuery(): Builder|User
+    {
+        return (new User())->newModelQuery();
     }
 }

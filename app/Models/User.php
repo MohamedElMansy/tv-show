@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\User\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'image'
+        'image',
+        'role'
     ];
 
     /**
@@ -52,6 +54,11 @@ class User extends Authenticatable
         $imageName = time() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/images', $imageName);
         $this->attributes['image'] = $imageName;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === UserRoleEnum::ADMIN->value;
     }
 
     public function follows(): BelongsToMany

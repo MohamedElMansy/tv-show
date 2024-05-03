@@ -7,6 +7,10 @@ use App\Http\Controllers\Show\ShowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\Episode\EpisodeController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Auth\AuthAdminController;
+use App\Http\Controllers\Admin\User\UserAdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,3 +41,18 @@ Route::group(['middleware' => ['auth']], function () {
     //Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AuthAdminController::class, 'showAdminLoginForm'])->name('admin.login');
+    Route::post('/login', [AuthAdminController::class, 'login'])->name('admin.login.submit');
+
+    Route::group(['middleware' => [AdminMiddleware::class]],function (){
+        Route::get('/', [DashboardController::class , 'index'])->name('admin');
+        Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
+        Route::get('/users/{id}', [UserAdminController::class, 'show'])->name('users.show');
+        Route::post('/logout', [AuthAdminController::class, 'logout'])->name('admin.logout');
+    });
+});
+
+
+
