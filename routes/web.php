@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Login routes
+// User Login routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-// Register routes
+// User Register routes
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
@@ -42,10 +42,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
 
+//Admin Routes
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthAdminController::class, 'showAdminLoginForm'])->name('admin.login');
     Route::post('/login', [AuthAdminController::class, 'login'])->name('admin.login.submit');
-
+    // auth routes for only admin
     Route::group(['middleware' => [AdminMiddleware::class]],function (){
         Route::get('/', [DashboardController::class , 'index'])->name('admin');
         Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');

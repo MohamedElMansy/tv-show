@@ -12,10 +12,10 @@ class LoginAdminService
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+            //check is user has admin role
             if ($user->isAdmin()) {
                 // Authentication passed for admin
-                return redirect()->intended('/admin');
+                return redirect('/admin');
             }else{
                 Auth::logout();
             }
