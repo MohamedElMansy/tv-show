@@ -18,7 +18,7 @@ php : "^8.2"
 ## Setup steps
 Clone the repository
 
-git clone https://github.com/MohamedElMansy/tv-show.git
+    git clone https://github.com/MohamedElMansy/tv-show.git
 
 Switch to the repo folder
 
