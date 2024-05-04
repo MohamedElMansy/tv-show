@@ -38,7 +38,7 @@ Run the database migrations (**Set the database connection in .env before migrat
 
     php artisan migrate
 
-Run Admin Seeder to create the Admin
+Run Admin Seeder to create the Admin and shows
 
     php artisan db:seed
 
